@@ -2,15 +2,20 @@ import { Avatar } from './Avatar';
 import { Comment } from './Comment';
 import styles from './Post.module.css';
 
-export function Post(){
+export function Post(props){
+  console.log(props)
+  // author: { avatar: url, name: 'string', rule: 'string' }
+  // publishedAt: Date
+  // content: [ {id: 1, paragraph: 'string', type: 'string' } ]
+
   return(
     <article className={styles.post}>
       <header>
         <div className={styles.author}>
           <Avatar src="https://github.com/rodrigoviturino.png" />
           <div className={styles.authorInfo}>
-            <strong>Rodrigo Viturino</strong>
-            <span>Web Developer</span>
+            <strong>{props.author.name}</strong>
+            <span>{props.author.role}</span>
           </div>
         </div>
 
@@ -18,9 +23,11 @@ export function Post(){
       </header>
 
       <div className={styles.content}>
-        <p>Fale Pessoal!</p>
-        <p>lorem ipsum dolor sit amet</p>{' '}
-        <p>lorem ips</p>{' '}
+        {props.content.map((item) => {
+          if(item === 'paragraph') {
+            return item.content.content
+          }
+        })}
         <p>
           <a href="#">#voltaCuca</a>{' '}
           <a href="#">#foraRogerio</a>
