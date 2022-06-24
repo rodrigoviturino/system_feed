@@ -17,17 +17,31 @@ export function App() {
     {
       id: 1,
       author: {
-        avatarUrl: 'https://github.com/rodrigoviturino.png',
-        name: 'Rodrigo Viturino',
+        avatarUrl: 'https://github.com/adelmodias.png',
+        name: 'Adelmo Dias',
         role: 'Web Development'
       },
       content: [
         { type: 'paragraph', content: 'Fala Pessoal!'},
         { type: 'paragraph', content: 'Lorem ipsum dolor sit amet, consectetur'},
-        { type: 'link', content: 'jane.design/doctorcare'},
+        { type: 'link', content: 'Vamos Meu Tricolor Querido!'},
       ],
       publishedAt: new Date('2022-05-22 20:00:00'),
     },
+    {
+      id: 2,
+      author: {
+        avatarUrl: 'https://github.com/maykbrito.png',
+        name: 'Mayk brito',
+        role: 'Educator Development'
+      },
+      content: [
+        { type: 'paragraph', content: 'Fala Galera!'},
+        { type: 'paragraph', content: 'Sit amet, consectetur'},
+        { type: 'link', content: 'jane.design/doctorcare'},
+      ],
+      publishedAt: new Date('2022-06-23 10:30:00'),
+    }
   ]
 
 
