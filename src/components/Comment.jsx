@@ -14,6 +14,7 @@ export function Comment({ content, onDeleteComment }){
   function handleLikeCount(){
     setLikeCount(likeCount + 1);
   }
+  
 
   return(
     <section className={styles.comment}>
