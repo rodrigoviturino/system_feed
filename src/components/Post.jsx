@@ -17,16 +17,48 @@ export function Post(props){
   const publishedDateRelativeToNow = formatDistanceToNow(props.publishedAt, {
     locale: ptBR,
     addSuffix: true,
-  })
+  });
 
+  // Lista de Comentários
+  const [ comments, setComments ] = React.useState([
+    'Post Fera hem?!'
+  ]);
 
-  const [ comments, setComments ] = React.useState([ 1,2 ]);
+  // Valor Textarea
+  const [newCommentText, setNewCommentText] = React.useState('');
 
-  function handleComments(event){
+  // Formulario
+  function handleCreateNewComment(event){
     event.preventDefault();
-    
-    setComments([...comments, comments.length + 1]);
+      // Lista de Comentários
+    setComments([...comments, newCommentText]);
+
+    setNewCommentText('');
   }
+
+  // Textarea
+  function handleNewCommentChange(event){
+    // Valor do Campo
+    event.target.setCustomValidity('');
+    setNewCommentText(event.target.value);
+  }
+
+  // Método para deletar comentário
+  function deleteComment(commentToDelete){
+
+    const commentsWithoutDeleteOne = comments.filter(comment => {
+      return comment !== commentToDelete
+    });
+
+    setComments(commentsWithoutDeleteOne);
+  }
+
+  // Validação INPUT
+  function handleNewCommentInvalid(event){
+    event.target.setCustomValidity('Olhe o campo');
+  }
+
+  const isNewCommentEmpty = newCommentText.length === 0;
 
   return(
     <article className={styles.post}>
@@ -61,19 +93,31 @@ export function Post(props){
         </p>
       </div>
 
-      <form onSubmit={handleComments} className={styles.commentForm}>
+      <form onSubmit={handleCreateNewComment} className={styles.commentForm}>
+        
         <textarea
+          name="comment"
           placeholder="Deixe seu comentário"
+          value = {newCommentText}
+          onChange={handleNewCommentChange}
+          onInvalid={handleNewCommentInvalid}
+          required
         />
 
         <footer>
-          <button type="submit">Adicionar Comentário</button>
+          <button type="submit" disabled={isNewCommentEmpty}>Adicionar Comentário</button>
         </footer>
       </form>
 
       <div className={styles.commentList}>
-        {comments.map((item) => {
-          return <Comment key={item} />
+        {comments.map((comment) => {
+          return (
+            <Comment
+              key={comment}
+              content={comment}
+              onDeleteComment={deleteComment}
+            />
+          )
         })}
       </div>
 
